@@ -18,18 +18,19 @@ class FuncService extends Service {
     return Promise.resolve(result.toArray());
   }
 
-  async saveData(id, content) {
+  async saveData(body) {
+    const { id } = body
     const client = new MongoClient('mongodb://120.26.42.184:27017', { useNewUrlParser: true });
     let result;
     await client.connect();
     const db = client.db('collie');
     const man = db.collection('func');
-    const data = await this.getData(id);
+    const data = await this.getData (id);
     if (data.length <= 0) {
       console.log('insert');
-      result = await man.insertOne({ 'id': id, content: content });
+      result = await man.insertOne(body);
     } else {
-      result = await man.updateOne({ 'id': id }, { '$set': { content: content } });
+      result = await man.updateOne({ 'id': id }, { '$set': { ...body } });
     }
     return Promise.resolve(result.result);
   }
@@ -47,8 +48,8 @@ class FuncService extends Service {
     return Promise.resolve(funcs);
   }
 
-  async saveFunc(id, content) {
-    const msg = await this.saveData(id, content);
+  async saveFunc(body) {
+    const msg = await this.saveData(body);
     return msg;
   }
 }

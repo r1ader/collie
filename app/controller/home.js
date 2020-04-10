@@ -44,8 +44,7 @@ class HomeController extends Controller {
 
   async save() {
     const { ctx } = this;
-    const { id, content } = ctx.request.body;
-    const msg = await ctx.service.func.saveFunc(id, content);
+    const msg = await ctx.service.func.saveFunc(ctx.request.body);
     ctx.body = {
       state: 'success',
       msg: msg
