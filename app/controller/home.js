@@ -26,8 +26,20 @@ class HomeController extends Controller {
     const funcStr = await ctx.service.func.getFunc(ctx.params.id);
     console.log(funcStr);
     const func = eval(funcStr+';main');
-    const res = func(body);
-    ctx.body = res;
+
+    const AsyncFunction = Object.getPrototypeOf(async function(){}).constructor
+    try{
+      if(func instanceof AsyncFunction){
+        ctx.body = await func(body);
+      }else{
+        ctx.body = func(body);
+      }
+    }catch (e) {
+      ctx.body = {
+        state: 'failed',
+        msg: e.toString()
+      }
+    }
   }
 
   async save() {
