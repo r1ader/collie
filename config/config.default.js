@@ -31,7 +31,7 @@ module.exports = appInfo => {
 
   config.cors = {
     origin: '*', // 表示允许的源
-    allowMethods: ['GET', 'POST'] // 表示允许的http请求方式
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS' // 表示允许的http请求方式
   };
 
   return {
