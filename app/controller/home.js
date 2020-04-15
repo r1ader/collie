@@ -1,6 +1,7 @@
 'use strict';
 
 const Controller = require('egg').Controller;
+const MongoURI = 'mongodb://root:980116hyf@127.0.0.1:27017'
 
 class HomeController extends Controller {
   async index() {
