@@ -1,11 +1,12 @@
 'use strict';
 var MongoClient = require('mongodb').MongoClient;
 const Service = require('egg').Service;
+const MongoURI = 'mongodb://root:980116hyf@127.0.0.1:27017'
 
 class FuncService extends Service {
 
   async getData(id) {
-    const client = new MongoClient('mongodb://root:980116hyf@127.0.0.1:27017', { useNewUrlParser: true });
+    const client = new MongoClient(MongoURI, { useNewUrlParser: true });
     let result;
     await client.connect();
     const db = client.db('collie');
@@ -20,7 +21,7 @@ class FuncService extends Service {
 
   async saveData(body) {
     const { id } = body
-    const client = new MongoClient('mongodb://root:980116hyf@127.0.0.1:27017', { useNewUrlParser: true });
+    const client = new MongoClient(MongoURI, { useNewUrlParser: true });
     let result;
     await client.connect();
     const db = client.db('collie');
