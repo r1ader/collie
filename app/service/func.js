@@ -5,7 +5,7 @@ const Service = require('egg').Service;
 class FuncService extends Service {
 
   async getData(id) {
-    const client = new MongoClient('mongodb://120.26.42.184:27017', { useNewUrlParser: true });
+    const client = new MongoClient('mongodb://127.0.0.1:27017', { useNewUrlParser: true });
     let result;
     await client.connect();
     const db = client.db('collie');
@@ -20,7 +20,7 @@ class FuncService extends Service {
 
   async saveData(body) {
     const { id } = body
-    const client = new MongoClient('mongodb://120.26.42.184:27017', { useNewUrlParser: true });
+    const client = new MongoClient('mongodb://127.0.0.1:27017', { useNewUrlParser: true });
     let result;
     await client.connect();
     const db = client.db('collie');
